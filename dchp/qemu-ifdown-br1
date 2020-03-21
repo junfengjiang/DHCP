@@ -1,0 +1,12 @@
+#!/bin/bash
+bridge=br1
+
+if [ -n "$1" ]; then
+	ip link set $1 down
+	sleep 1
+	brctl delif $bridge $1
+	[ $? -eq 0 ] && exit 0 || exit 1
+else
+	echo "Error: no port specified."
+	exit 2
+fi	
